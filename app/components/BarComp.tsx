@@ -5,6 +5,8 @@ const Chart = dynamic(() => import('react-apexcharts'), {
     ssr: false
 });
 
+
+
 interface SeriesData {
     name: string;
     data: number[];
@@ -62,6 +64,12 @@ const BarComp: React.FC<BarCompProps> = ({ selectedFilter }) => {
             ...prevState,
             series: newSeries
         }));
+
+        // Check if the 'window' object is available before accessing it
+        if (typeof window !== 'undefined') {
+            // You can access the 'window' object here
+            // and perform any operations that require it
+        }
     }, [selectedFilter]);
 
     const getSeriesData = (filter: string): SeriesData[] => {
@@ -103,6 +111,7 @@ const BarComp: React.FC<BarCompProps> = ({ selectedFilter }) => {
                 ];
         }
     };
+
 
     return (
         <div className="col-span-3 w-[60%]">

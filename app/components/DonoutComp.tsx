@@ -1,125 +1,82 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 
 const Chart = dynamic(() => import('react-apexcharts'), {
     ssr: false
 });
 
-interface SeriesData {
-    name: string;
-    data: number[];
-}
 
-interface BarCompProps {
+interface DonutProps {
     selectedFilter: string;
 }
 
-const BarComp: React.FC<BarCompProps> = ({ selectedFilter }) => {
-    const [state, setState] = useState<{
+const Donut: React.FC<DonutProps> = ({ selectedFilter }) => {
+    const [chartOptions, setChartOptions] = useState<{
+        series: number[];
         options: ApexCharts.ApexOptions;
-        series: SeriesData[];
     }>({
+        series: [53, 20, 27],
         options: {
-            chart: {
-                id: "basic-bar",
-                toolbar: {
-                    show: false
-                },
-                stacked: true
-            },
             plotOptions: {
-                bar: {
-                    horizontal: false,
-                    borderRadius: 4, // Set the border radius here
-                    dataLabels: {
-                        position: 'top',
-                    },
+                pie: {
+                    donut: {
+                        labels: {
+                            show: false // Hide series labels
+                        }
+                    }
                 }
             },
             dataLabels: {
-                enabled: false
-            },
-            xaxis: {
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-            },
-            yaxis: {
-                max: 50
+                enabled: false // Set dataLabels to false
             },
             legend: {
-                show: false
+                show: true, // Show the legend
+                position: 'bottom' // Position the legend at the bottom
             },
-            grid: {
-                show: false
-            },
-            colors: ['#19979b', 'rgba(25 151 155 / 0.5)']
-        },
-        series: []
+            colors: ['#19979b', '#4bcdd1', '#b6ddde'], // Change colors
+            labels: ['Lorem A', 'Lorem B', 'Lorem C'] // Change legend names
+        }
     });
 
     useEffect(() => {
+        // Update chart data based on selected filter
         const newSeries = getSeriesData(selectedFilter);
-        setState(prevState => ({
+        setChartOptions(prevState => ({
             ...prevState,
             series: newSeries
         }));
     }, [selectedFilter]);
 
-    const getSeriesData = (filter: string): SeriesData[] => {
+    const getSeriesData = (filter: string): number[] => {
         switch (filter) {
             case 'Product A':
-                return [
-                    { name: 'PRODUCT A', data: [10, 20, 10, 5, 5, 10, 10, 5, 5, 5, 10, 10] },
-                    { name: 'PRODUCT B', data: [15, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5] }
-                ];
+                return [53, 20, 27]; // Update series data for Product A
             case 'Product B':
-                return [
-                    { name: 'PRODUCT A', data: [5, 10, 5, 10, 5, 5, 5, 5, 5, 5, 5, 5] },
-                    { name: 'PRODUCT B', data: [10, 5, 10, 5, 5, 5, 5, 5, 5, 5, 5, 5] }
-                ];
+                return [30, 40, 50]; // Update series data for Product B
             case 'Product C':
-                return [
-                    { name: 'PRODUCT A', data: [5, 5, 5, 10, 10, 5, 15, 5, 5, 5, 5, 5] },
-                    { name: 'PRODUCT B', data: [10, 10, 15, 15, 5, 5, 5, 25, 5, 15, 5, 5] }
-                ];
+                return [10, 20, 30]; // Update series data for Product C
             case '1M':
-                return [
-                    { name: 'PRODUCT A', data: [5, 10, 15, 10, 12, 10, 5, 10, 15, 20, 25, 30] },
-                    { name: 'PRODUCT B', data: [2, 5, 8, 10, 5, 5, 8, 10, 10, 15, 20, 25] }
-                ];
+                return [10, 20, 30];
             case '6M':
-                return [
-                    { name: 'PRODUCT A', data: [15, 25, 35, 10, 20, 30, 25, 35, 30, 20, 25, 35] },
-                    { name: 'PRODUCT B', data: [10, 15, 25, 20, 10, 15, 25, 30, 35, 25, 20, 15] }
-                ];
+                return [10, 24, 10];
             case '1Y':
-                return [
-                    { name: 'PRODUCT A', data: [20, 30, 40, 25, 35, 45, 30, 40, 45, 35, 40, 45] },
-                    { name: 'PRODUCT B', data: [15, 20, 25, 30, 25, 20, 25, 30, 35, 40, 35, 30] }
-                ];
+                return [60, 20, 30];
             default:
-                return [
-                    { name: 'PRODUCT A', data: [20, 30, 10, 40, 21, 10, 10, 5, 5, 5, 10, 10] },
-                    { name: 'PRODUCT B', data: [15, 5, 30, 5, 5, 32, 11, 9, 10, 5, 25, 5] }
-                ];
+                return [53, 20, 27]; // Default series data
         }
     };
 
     return (
-        <div className="col-span-3 w-[60%]">
-            <div className="app">
-                <div className="row">
-                    <div className="mixed-chart">
-                        <Chart
-                            options={state.options}
-                            series={state.series}
-                            type="bar"
-                            width='100%'
-                        />
-                    </div>
-                </div>
+        <div className="relative">
+            <Chart options={chartOptions.options} series={chartOptions.series} type="donut" width='100%' />
+            <div className="absolute top-[40%]  left-[50%] -translate-x-[50%] -translate-y-[50%]
+                text-[6px] sm:text-sm md:text-md
+            ">
+                <div className="">Total Value</div>
+                <div className="">$7654</div>
             </div>
         </div>
     );
 }
 
-export default BarComp;
+export default Donut;
