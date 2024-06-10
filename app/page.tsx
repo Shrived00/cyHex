@@ -41,6 +41,7 @@ import {
 
 import { Input } from "@/components/ui/input"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import Dashboard from "./components/Dashboard";
 
 export default function Home() {
   return (
@@ -309,20 +310,20 @@ export default function Home() {
                   />
                 </div>
               </form>
-              {/* <Flag className="w-4 h-4" />
+              <Flag className="w-4 h-4" />
               <LayoutDashboard className="w-4 h-4" />
               <Fullscreen className="w-4 h-4" />
               <BellDot className="w-4 h-4" />
-              <Settings className="w-4 h-4" /> */}
+              <Settings className="w-4 h-4" />
 
             </div>
 
           </header>
 
 
-          <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
+          <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6 bg-muted/40 ">
 
-            cenetr
+            <Dashboard />
           </main>
         </div>
       </div>
