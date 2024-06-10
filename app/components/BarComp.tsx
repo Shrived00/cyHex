@@ -1,8 +1,20 @@
 import React, { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
 
-const BarComp = ({ selectedFilter }) => {
-    const [state, setState] = useState({
+interface SeriesData {
+    name: string;
+    data: number[];
+}
+
+interface BarCompProps {
+    selectedFilter: string;
+}
+
+const BarComp: React.FC<BarCompProps> = ({ selectedFilter }) => {
+    const [state, setState] = useState<{
+        options: ApexCharts.ApexOptions;
+        series: SeriesData[];
+    }>({
         options: {
             chart: {
                 id: "basic-bar",
@@ -16,13 +28,12 @@ const BarComp = ({ selectedFilter }) => {
                     horizontal: false,
                     borderRadiusApplication: 'end',
                     dataLabels: {
-                        position: 'top', // Keep this to maintain the structure
+                        position: 'top',
                     },
-                    width: '2' // Decrease the bar width
                 }
             },
             dataLabels: {
-                enabled: false // Disable data labels on the bars
+                enabled: false
             },
             xaxis: {
                 categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
@@ -36,20 +47,20 @@ const BarComp = ({ selectedFilter }) => {
             grid: {
                 show: false
             },
-            colors: ['#19979b', 'rgba(25 151 155 / 0.5)'] // Colors for PRODUCT A and PRODUCT B
+            colors: ['#19979b', 'rgba(25 151 155 / 0.5)']
         },
         series: []
     });
 
     useEffect(() => {
-        // Update chart data based on selected filter
         const newSeries = getSeriesData(selectedFilter);
-        setState((prevState) => ({
+        setState(prevState => ({
             ...prevState,
             series: newSeries
         }));
     }, [selectedFilter]);
-    const getSeriesData = (filter) => {
+
+    const getSeriesData = (filter: string): SeriesData[] => {
         switch (filter) {
             case 'Product A':
                 return [

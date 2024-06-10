@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import Chart from 'react-apexcharts';
 
-const Donut = ({ selectedFilter }) => {
-    const [chartOptions, setChartOptions] = useState({
+interface DonutProps {
+    selectedFilter: string;
+}
+
+const Donut: React.FC<DonutProps> = ({ selectedFilter }) => {
+    const [chartOptions, setChartOptions] = useState<{
+        series: number[];
+        options: ApexCharts.ApexOptions;
+    }>({
         series: [53, 20, 27],
         options: {
             plotOptions: {
@@ -22,7 +29,7 @@ const Donut = ({ selectedFilter }) => {
                 position: 'bottom' // Position the legend at the bottom
             },
             colors: ['#19979b', '#4bcdd1', '#b6ddde'], // Change colors
-            labels: ['Product A', 'Product B', 'Product C'] // Change legend names
+            labels: ['Lorem A', 'Lorem B', 'Lorem C'] // Change legend names
         }
     });
 
@@ -35,7 +42,7 @@ const Donut = ({ selectedFilter }) => {
         }));
     }, [selectedFilter]);
 
-    const getSeriesData = (filter) => {
+    const getSeriesData = (filter: string): number[] => {
         switch (filter) {
             case 'Product A':
                 return [53, 20, 27]; // Update series data for Product A
