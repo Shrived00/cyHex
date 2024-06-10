@@ -26,7 +26,7 @@ const BarComp: React.FC<BarCompProps> = ({ selectedFilter }) => {
             plotOptions: {
                 bar: {
                     horizontal: false,
-                    borderRadiusApplication: 'end',
+                    borderRadius: 4, // Set the border radius here
                     dataLabels: {
                         position: 'top',
                     },

@@ -20,7 +20,7 @@ const pendingProducts = [
 const SalesStat = () => {
     return (
 
-        <Card className='mt-3 col-span-4 xl:col-span-2'>
+        <Card className='mt-3 col-span-3 xl:col-span-2'>
             <CardHeader className="px-7">
                 <CardTitle className='flex items-center justify-between'>
                     <div className="">Sales Statistics</div>
@@ -36,13 +36,11 @@ const SalesStat = () => {
 
                     </div>
 
-
-
-
-
-
                 </CardDescription>
-                <div className=" h-5 bg-black border rounded-lg">hi</div>
+
+
+
+
             </CardHeader>
 
             <CardContent>
