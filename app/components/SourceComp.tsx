@@ -5,7 +5,7 @@ import { Progress } from "@/components/ui/progress"
 
 const SourceComp = () => {
     return (
-        <div className='col-span-3 xl:col-span-2 bg-white rounded-e-md flex flex-col border  mt-3 p-3'>
+        <div className='col-span-4 xl:col-span-2 bg-white rounded-e-md flex flex-col border  mt-3 p-3'>
             <div className="flex items-baseline">
                 <div className="w-[50%] flex-wrap font-semibold">Source of Purchases</div>
                 <div className="flex items-center justify-center"><div className="font-semibold">Sort By :</div>Yearly <ChevronDown /></div>
@@ -28,7 +28,7 @@ const SourceComp = () => {
             <div className="flex text-center text-xs w-[60%] mx-auto my-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae vel iste </div>
 
 
-            <div className="flex gap-3 items-center justify-between pt-2">
+            <div className="grid grid-cols-3 gap-3 items-center justify-between pt-2">
                 <div className="">
                     <div className="">
                         <Progress value={80} className="h-2" indicatorColor="bg-blue-300" />

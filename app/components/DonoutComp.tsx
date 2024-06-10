@@ -64,8 +64,8 @@ const Donut: React.FC<DonutProps> = ({ selectedFilter }) => {
     return (
         <div className="relative">
             <Chart options={chartOptions.options} series={chartOptions.series} type="donut" width='100%' />
-            <div className="absolute top-[43%] left-[50%] -translate-x-[50%] -translate-y-[50%]
-                text-xs sm:text-sm md:text-md
+            <div className="absolute top-[40%]  left-[50%] -translate-x-[50%] -translate-y-[50%]
+                text-[6px] sm:text-sm md:text-md
             ">
                 <div className="">Total Value</div>
                 <div className="">$7654</div>
