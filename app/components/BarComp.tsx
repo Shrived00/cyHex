@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Chart from "react-apexcharts";
+import dynamic from 'next/dynamic';
+
+const Chart = dynamic(() => import('react-apexcharts'), {
+    ssr: false
+});
 
 interface SeriesData {
     name: string;
@@ -99,7 +103,6 @@ const BarComp: React.FC<BarCompProps> = ({ selectedFilter }) => {
                 ];
         }
     };
-
 
     return (
         <div className="col-span-3 w-[60%]">
